@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen": "sanity typegen generate"
+    "typegen": "npx sanity@latest schema extract && npx sanity@latest typegen generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.3.4",
@@ -17,11 +17,12 @@
     "@sanity/vision": "^3.64.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
     "lucide-react": "^0.456.0",
     "next": "15.0.3",
     "next-sanity": "^9.8.15",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "sanity": "^3.64.1",
     "styled-components": "^6.1.13",
     "tailwind-merge": "^2.5.4",
@@ -34,6 +35,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
+    "sanity-codegen": "^0.6.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
