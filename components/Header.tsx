@@ -4,9 +4,13 @@ import { ClerkLoaded, SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import Form from "next/form";
 import { PackageIcon, ShoppingCartIcon } from "lucide-react";
+import { useCartStore } from "@/store/store";
 
 function Header() {
   const { user } = useUser();
+  const itemCount = useCartStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   const createClerkPasskey = async () => {
     try {
@@ -45,6 +49,10 @@ function Header() {
             className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             <ShoppingCartIcon className="w-6 h-6" />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              {itemCount}
+            </span>
+
             <span>My Cart</span>
           </Link>
 
