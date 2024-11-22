@@ -1,15 +1,15 @@
-import { BasketIcon, TrolleyIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { BasketIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const orderType = defineType({
     name: 'order',
     title: 'Order',
     type: 'document',
-    icon: TrolleyIcon,
+    icon: BasketIcon,
     fields: [
         defineField({
-            name: "orderProducts",
-            title: "Order Products",
+            name: "orderNumber",
+            title: "Order Number",
             type: "string",
             validation: (Rule) => Rule.required(),
         }),
@@ -31,7 +31,7 @@ export const orderType = defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: "CustomerName",
+            name: "customerName",
             title: "Customer Name",
             type: "string",
             validation: (Rule) => Rule.required(),
@@ -52,38 +52,40 @@ export const orderType = defineType({
             name: "products",
             title: "Products",
             type: "array",
-            of: [{
-                type: "object",
-                fields: [
-                    defineField({
-                        name: "product",
-                        title: "Product Bought",
-                        type: "reference",
-                        to: [{ type: "product" }],
-                    }),
-                    defineField({
-                        name: "quantity",
-                        title: "Quantity Purchased",
-                        type: "number",
-                    }),
-                ],
-                preview: {
-                    select: {
-                        product: "product.name",
-                        quantity: "quantity",
-                        image: "product.image",
-                        price: "product.price",
-                        currency: "product.currency",
-                    },
-                    prepare(select) {
-                        return {
-                            title: `${select.product} x ${select.quantity}`,
-                            subtitle: `${select.price} * ${select.quantity}`,
-                            media: select.image,
+            of: [
+                defineArrayMember({
+                    type: "object",
+                    fields: [
+                        defineField({
+                            name: "product",
+                            title: "Product Bought",
+                            type: "reference",
+                            to: [{ type: "product" }],
+                        }),
+                        defineField({
+                            name: "quantity",
+                            title: "Quantity Purchased",
+                            type: "number",
+                        }),
+                    ],
+                    preview: {
+                        select: {
+                            product: "product.name",
+                            quantity: "quantity",
+                            image: "product.image",
+                            price: "product.price",
+                            currency: "product.currency",
+                        },
+                        prepare(select) {
+                            return {
+                                title: `${select.product} x ${select.quantity}`,
+                                subtitle: `${select.price * select.quantity}`,
+                                media: select.image,
+                            }
                         }
-                    }
-                },
-            }],
+                    },
+                }),
+            ],
         }),
         defineField({
             name: "totalPrice",
@@ -126,7 +128,7 @@ export const orderType = defineType({
     ],
     preview: {
         select: {
-            name: "CustomerName",
+            name: "customerName",
             amount: "totalPrice",
             currency: "currency",
             orderId: "orderNumber",

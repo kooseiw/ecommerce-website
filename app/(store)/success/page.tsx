@@ -47,7 +47,7 @@ function SuccessPage() {
           <p className="text-lg text-gray-700 mb-4 text-center">
             Your order has been confirmed and will be shipped shortly.
           </p>
-          <div className="space-y-2">
+          <div className="space-y-2 text-center">
             {orderNumber && (
               <p className="text-gray-600 items-center space-x-5">
                 <span>Order Number:</span>
