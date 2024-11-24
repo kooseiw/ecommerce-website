@@ -5,6 +5,9 @@ import Image from "next/image";
 import { PortableText } from "next-sanity";
 import AddToCartButton from "@/components/AddToCartButton";
 
+export const revalidate = 60;
+export const dynamic = "force-static";
+
 async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);

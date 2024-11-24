@@ -3,6 +3,9 @@ import ProductsView from "@/components/ProductView";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
 
+export const revalidate = 60;
+export const dynamic = "force-static";
+
 export default async function Home() {
   const products = await getAllProducts();
   const categories = await getAllCategories();
