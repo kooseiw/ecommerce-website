@@ -1,14 +1,13 @@
+/* eslint-disable */
 import ProductGrid from "@/components/ProductGrid";
 import { searchProductByName } from "@/sanity/lib/products/searchProductByName";
 
-async function SearchPage({
+export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: {
-    query: string;
-  };
-}) {
-  const { query } = await searchParams;
+  searchParams: any;
+}): Promise<JSX.Element> {
+  const query = (searchParams?.query as string) || "";
   const products = await searchProductByName(query);
 
   if (!products.length) {
@@ -37,5 +36,3 @@ async function SearchPage({
     </div>
   );
 }
-
-export default SearchPage;

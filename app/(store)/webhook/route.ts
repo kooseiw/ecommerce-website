@@ -3,7 +3,6 @@ import stripe from "@/lib/stripe";
 import { backendClient } from "@/sanity/lib/backendClient";
 import { headers } from "next/headers";
 import Stripe from "stripe";
-import { error } from "console";
 import { Metadata } from "@/actions/createCheckoutSession";
 
 export async function POST(req: NextRequest) {
